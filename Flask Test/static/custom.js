@@ -187,6 +187,7 @@ $(function() {
 
 function sendData(code,time){
 
+
 //  code : code on the financial market , company symbol
 //  time : the amount of days of the financial hisotory request
 
@@ -202,6 +203,8 @@ var details = {
         contentType:"application/json; charset=utf-8",
         success : function(response){
             console.log(response)
+
+
         },
         error: function(error){
             console.log(error)

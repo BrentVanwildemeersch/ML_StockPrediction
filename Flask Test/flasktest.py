@@ -4,6 +4,8 @@ import time
 from datetime import datetime,timedelta
 import pandas_datareader.data as web
 
+import sklearn
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -16,7 +18,7 @@ def recieveData():
     time = request.json['time']
     data = getFinancialData(symbol,time)
 
-    return str(len(data))
+    return str(data)
 
 def getFinancialData(symbol, Day_amount):
         stocks = [symbol]
@@ -24,14 +26,12 @@ def getFinancialData(symbol, Day_amount):
         startDate = (endDate - timedelta(days=int(Day_amount)))
 
         df = web.DataReader(symbol,"yahoo",startDate,endDate)
-        dates =[]
-        for x in range(len(df)):
-            newdate = str(df.index[x])
-            newdate = newdate[0:10]
-            dates.append(newdate)
-        df['dates'] = dates
 
-        return df
+        return df.to_html()
+
+
+
+
 
 
 if __name__ == "__main__":
