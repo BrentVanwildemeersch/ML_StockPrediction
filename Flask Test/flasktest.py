@@ -23,9 +23,6 @@ def getFinancialData(symbol, Day_amount):
         startDate = (endDate - timedelta(days=int(Day_amount)))
 
 
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)
 
