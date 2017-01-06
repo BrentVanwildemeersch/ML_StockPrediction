@@ -3,6 +3,7 @@ from flask import render_template
 import time
 from datetime import datetime,timedelta
 import pandas_datareader.data as web
+import pandas
 
 import sklearn
 
@@ -26,8 +27,8 @@ def getFinancialData(symbol, Day_amount):
         startDate = (endDate - timedelta(days=int(Day_amount)))
 
         df = web.DataReader(symbol,"yahoo",startDate,endDate)
+        df[['Open','Close']]
 
-        return df.to_html()
 
 
 
