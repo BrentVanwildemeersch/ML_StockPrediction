@@ -16,7 +16,7 @@ def recieveData():
     time = request.json['time']
     data = getFinancialData(symbol,time)
 
-    return data
+    return str(len(data))
 
 def getFinancialData(symbol, Day_amount):
         stocks = [symbol]
