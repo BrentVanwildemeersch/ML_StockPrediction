@@ -12,7 +12,7 @@ def recieveData():
     symbol = request.json['code']
     symbol = request.json['time']
     return
-
+#
 
 if __name__ == "__main__":
     app.run(debug=True)
