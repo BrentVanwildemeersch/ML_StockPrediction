@@ -10,9 +10,13 @@ def hello():
 @app.route("/receiveData", methods=['POST'])
 def recieveData():
     symbol = request.json['code']
-    symbol = request.json['time']
-    return
-#
+    time = request.json['time']
+    return  symbol
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+def getFinancialData(symbol, date):
+    print "Test"
