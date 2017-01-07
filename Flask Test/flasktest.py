@@ -85,7 +85,7 @@ def getFinancialData(symbol, Day_amount):
 
         regr_open = linear_model.LinearRegression()
         regr_open.fit(X_train,Y_train)
-        score = regr_open.score(X_test,Y_test)
+        score_open = regr_open.score(X_test,Y_test)
 
         # voorspellen openingswaarde nieuwe dag
         # return X_predictOpen
@@ -93,8 +93,28 @@ def getFinancialData(symbol, Day_amount):
 
 # voorspellen van de low en high variabelen van de nieuwe dag
         df_predictLowHigh = df[['Close','Open','High','Low']]
-        df_predictLowHigh = df_predictLowHigh.Close.shift(1)
-        return df_predictLowHigh
+        df_predictLowHigh.Close = df_predictLowHigh.Close.shift(1)
+        df_predictLowHigh = df_predictLowHigh.ix[1:]
+
+        # multiple regression om low high te gaan voorspellen
+        df_predictLowHigh.insert(1,"Close x2", df_predictLowHigh.Close**2)
+        df_predictLowHigh.insert(2,"Close x3",df_predictLowHigh.Close**3)
+        df_predictLowHigh.insert(4,"Open x2",df_predictLowHigh.Open**2)
+        df_predictLowHigh.insert(5, "Open x3", df_predictLowHigh.Open ** 3)
+
+        X_predictLowHigh = df_predictLowHigh.ix[:,0:6]
+        Y_predictLowHigh = df_predictLowHigh.ix[:,6:8]
+
+        X_predictLowHigh_train,X_predictLowHigh_test,Y_predictLowHigh_train,Y_predictLowHigh_test= train_test_split(X_predictLowHigh,Y_predictLowHigh,test_size=0.5)
+
+        regr_LowHigh = linear_model.LinearRegression()
+        regr_LowHigh.fit(X_predictLowHigh_train,Y_predictLowHigh_train)
+        score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test,Y_predictLowHigh_test)
+
+
+
+
+        # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
 
 
 
