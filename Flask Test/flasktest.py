@@ -43,16 +43,22 @@ def getFinancialData(symbol, Day_amount):
         regr_bp = linear_model.LinearRegression()
         regr_bp.fit(X_train,Y_train)
 
+        # open today == close yesteraday
+        openTdy = Y.iloc[len(X)-1][0]
+        # predict today
+        closeTdy =regr_bp.predict(openTdy)
+
+        # open tommorow = close today
+        # predict close tomorrow
+        closeTomorrow= regr_bp.predict(closeTdy)
+
+        # predict +1day
+        close_2day = regr_bp.predict(closeTomorrow)
 
 
 
 
-
-
-
-        # return X
-
-        return
+        return close_2day
 
 
 
