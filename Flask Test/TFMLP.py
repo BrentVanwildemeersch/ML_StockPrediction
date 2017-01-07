@@ -61,6 +61,8 @@ def _GetActiveFn(name):
         return tf.nn.softplus
     elif name=='softsign':
         return tf.nn.softsign
+    elif name=='softmax':
+        return tf.nn.softmax
     return None
 
 
@@ -112,7 +114,7 @@ class MLPR :
     # param verbose : Print training information
     # param reg: Regularization weight
 
-    def __init__(self,layers,actvFn='tanh', learnRate=0.001, decay=0.9, maxItr = 2000
+    def __init__(self,layers,actvFn='softmax', learnRate=0.001, decay=0.9, maxItr = 2000
             ,tol = 1e-2, batchSize= None, verbose = False,reg=0.001):
         self.tol = tol
         self.mItr = maxItr
@@ -169,6 +171,7 @@ class MLPR :
         res = self.sess.run(self.pred, feed_dict={self.x:A})
         return res
 
-
+    def evaluate(self):
+        print "evaluate"
 
 
