@@ -154,6 +154,7 @@ class MLPR :
             err = np.sqrt(self.sess.run(self.loss,feed_dict={self.x:A,self.y:y}))
             if(self.vrbse):
                 print("Iter {:5d}\t{:.8f}".format(i+1,err))
+
             if(err<self.tol):
                 break
 

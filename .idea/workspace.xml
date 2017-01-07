@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2e22e57-67f5-4db0-8ab7-e3056d729ca4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Flask Test/TFMLP.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Flask Test/TFMLP.py" afterPath="$PROJECT_DIR$/Flask Test/TFMLP.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Flask Test/flasktest.py" afterPath="$PROJECT_DIR$/Flask Test/flasktest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,11 +22,11 @@
       <file leaf-file-name="flasktest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask Test/flasktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="94" column="22" lean-forward="true" selection-start-line="91" selection-start-column="7" selection-end-line="94" selection-end-column="22" />
+            <state relative-caret-position="450">
+              <caret line="108" column="0" lean-forward="true" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-                <element signature="e#5050#5444#0" expanded="false" />
+                <element signature="e#4057#4451#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -35,8 +35,8 @@
       <file leaf-file-name="TFMLP.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flask Test/TFMLP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="525">
+              <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -45,7 +45,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flask Test/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="15">
               <caret line="18" column="80" lean-forward="false" selection-start-line="18" selection-start-column="80" selection-end-line="42" selection-end-column="46" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
@@ -86,6 +86,7 @@
         <option value="$PROJECT_DIR$/Flask Test/static/styles/custom.css" />
         <option value="$PROJECT_DIR$/Flask Test/static/custom.js" />
         <option value="$PROJECT_DIR$/Flask Test/templates/index.html" />
+        <option value="$PROJECT_DIR$/Flask Test/TFMLP.py" />
         <option value="$PROJECT_DIR$/Flask Test/flasktest.py" />
       </list>
     </option>
@@ -411,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1483816922903</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Tensorflow">
+      <created>1483818048498</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1483818048498</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -469,7 +477,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -503,7 +511,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,7 +545,7 @@
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -571,7 +579,7 @@
           <caret line="55" column="25" lean-forward="false" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -592,7 +600,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -626,7 +634,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -671,19 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask Test/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="80" lean-forward="false" selection-start-line="18" selection-start-column="80" selection-end-line="42" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#1;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#1;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flask Test/prediction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -694,19 +689,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask Test/TFMLP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="525">
+          <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask Test/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="18" column="80" lean-forward="false" selection-start-line="18" selection-start-column="80" selection-end-line="42" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask Test/flasktest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="94" column="22" lean-forward="true" selection-start-line="91" selection-start-column="7" selection-end-line="94" selection-end-column="22" />
+        <state relative-caret-position="450">
+          <caret line="108" column="0" lean-forward="true" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5050#5444#0" expanded="false" />
+            <element signature="e#4057#4451#0" expanded="false" />
           </folding>
         </state>
       </provider>

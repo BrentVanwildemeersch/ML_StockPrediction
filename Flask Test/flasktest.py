@@ -6,6 +6,8 @@ from sklearn import linear_model
 from sklearn.cross_validation import train_test_split
 import tensorflow as tf
 from TFMLP import MLPR
+import matplotlib.pyplot as mpl
+import numpy as np
 
 app = Flask(__name__)
 
@@ -84,60 +86,30 @@ def getFinancialData(symbol, Day_amount):
         # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
 
 # opzetten van neuraal netwerk
-        X_total = df.ix[:,0:3]
-        Y_total = df.ix[:,3:4]
+        X_total =np.array([df.ix[:,0:3].reshape(-1,1)])
+        Y_total =np.array([df.ix[:,3:4].reshape(-1,1)])
         X_total_train, X_total_test, Y_total_train,Y_total_test = train_test_split(X_total,Y_total,test_size=0.4)
 
-        # Parameters
-        learning_rate = 000.1
-        training_epoche = 15
-        batch_size=100
-        display_step=1
 
         # Network Parameters
-        n_hidden_1 = 32
-        n_hidden_2 = 32
+        h = 64
         n_input  = 3  #number of neurons in the input layer
         n_output = 1 #number of neurons in the output layer
+        layers = [n_input,h,h,h,h,h,h,h,h,h,n_output]
+        mlpr = MLPR(layers,maxItr=2200,tol=0.4,reg=0.02,verbose=True)
 
-        x= tf.placeholder("float",[None,n_input])
-        y = tf.placeholder("float",[None,n_output])
+        # Learn the data
+        mlpr.fit(X_total_train,Y_total_train)
+        Y_total_predicted =mlpr.predict(X_total_test)
+
+#         plot the results
+        mpl.plot(X_total,Y_total,c="#f44242")
+        mpl.plot(X_total_test,Y_total_predicted,c="#15f709")
 
 
-        weights={
-            'h1': tf.Variable(tf.random_normal([n_input,n_hidden_1])),
-            'h2': tf.Variable(tf.random_normal([n_hidden_1,n_hidden_2])),
-            'out': tf.Variable(tf.random_normal([n_hidden_2,n_output]))
-        }
-        biases = {
-            'b1': tf.Variable(tf.random_normal([n_hidden_1])),
-            'b2': tf.Variable(tf.random_normal([n_hidden_2])),
-            'out': tf.Variable(tf.random_normal([n_output]))
-        }
 
-        # Construct our model
-        pred= multilayer_perceptron(x,weights,biases)
-
-        # Define loss and optimizer
-        cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred,y))
-        optimizer= tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
-
-        # initializing variables
-        init = tf.initialize_all_variables()
-
-        with tf.Session() as sess:
-            sess.run(init)
-
-        #     training cycle
-            for epoch in range(training_epoche):
-                avg_cost = 0
-                total_batch = int(len(X_total_train)/batch_size)
-
-        #         loop over alle batches
-                for i in range(total_batch):
-                    batch_x,batch_y = X_total_train.next_batch(batch_size)
-
-        return None
+#
+        return mpl.show()
 
 
 
