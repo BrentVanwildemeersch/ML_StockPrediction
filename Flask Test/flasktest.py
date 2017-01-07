@@ -86,9 +86,9 @@ def getFinancialData(symbol, Day_amount):
         # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
 
 # opzetten van neuraal netwerk
-        X_total =np.array([df.ix[:,0:3].reshape(-1,1)])
-        Y_total =np.array([df.ix[:,3:4].reshape(-1,1)])
-        X_total_train, X_total_test, Y_total_train,Y_total_test = train_test_split(X_total,Y_total,test_size=0.4)
+        X_total =df.ix[:,0:3]
+        Y_total =df.ix[:,3:4]
+        X_total_train, X_total_test, Y_total_train,Y_total_test = train_test_split(X_total,Y_total,test_size=0.3)
 
 
         # Network Parameters
@@ -96,20 +96,18 @@ def getFinancialData(symbol, Day_amount):
         n_input  = 3  #number of neurons in the input layer
         n_output = 1 #number of neurons in the output layer
         layers = [n_input,h,h,h,h,h,h,h,h,h,n_output]
-        mlpr = MLPR(layers,maxItr=2200,tol=0.4,reg=0.02,verbose=True)
+        mlpr = MLPR(layers,maxItr=2200,tol=0.4,reg=0.01,verbose=True)
 
         # Learn the data
         mlpr.fit(X_total_train,Y_total_train)
         Y_total_predicted =mlpr.predict(X_total_test)
 
 #         plot the results
-        mpl.plot(X_total,Y_total,c="#f44242")
-        mpl.plot(X_total_test,Y_total_predicted,c="#15f709")
 
 
 
 #
-        return mpl.show()
+        return mlpr.predict([[97.910004,95.38999,98.999998]])
 
 
 
