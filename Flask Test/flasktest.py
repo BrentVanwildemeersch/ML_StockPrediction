@@ -5,6 +5,7 @@ import pandas_datareader.data as web
 from sklearn import linear_model
 from sklearn.cross_validation import train_test_split
 import tensorflow as tf
+from TFMLP import MLPR
 
 app = Flask(__name__)
 
@@ -124,6 +125,18 @@ def getFinancialData(symbol, Day_amount):
         # initializing variables
         init = tf.initialize_all_variables()
 
+        with tf.Session() as sess:
+            sess.run(init)
+
+        #     training cycle
+            for epoch in range(training_epoche):
+                avg_cost = 0
+                total_batch = int(len(X_total_train)/batch_size)
+
+        #         loop over alle batches
+                for i in range(total_batch):
+                    batch_x,batch_y = X_total_train.next_batch(batch_size)
+
         return None
 
 
@@ -137,8 +150,8 @@ def multilayer_perceptron (x,weights,biases):
     layer2 = tf.add(tf.matmul(layer1,weights['h2']),biases['b2'])
     layer2 = tf.nn.relu(layer2)
 
-    #output layer with linear activation
-    outlayer = tf.matmul(layer2,weights,weights['out']) + biases['out']
+    # #output layer with linear activation
+    outlayer = tf.matmul(layer2,weights['out']) + biases['out']
     return outlayer
 
 
