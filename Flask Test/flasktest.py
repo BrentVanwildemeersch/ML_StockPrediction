@@ -118,6 +118,8 @@ def getFinancialData(symbol, Day_amount):
 
 
 
+# opstellen neural
+
 
 
 
