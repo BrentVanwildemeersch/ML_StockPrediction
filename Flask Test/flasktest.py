@@ -16,7 +16,31 @@ import matplotlib.pyplot as mpl
 import numpy as np
 import json
 
+global currentprice0
+global currentprice1
+global currentprice2
+global currentprice3
+global currentprice4
 
+global predictedopen0
+global predictedopen1
+global predictedopen2
+global predictedopen3
+
+global pricelow0
+global pricelow1
+global pricelow2
+global pricelow3
+
+global pricehigh0
+global pricehigh1
+global pricehigh2
+global pricehigh3
+
+global predictedclose0
+global predictedclose1
+global predictedclose2
+global predictedclose3
 
 # declaratie globale variabelen
 
@@ -35,7 +59,7 @@ def recieveData():
 
 
 
-    return json.dumps({"currentValue":currentprice,"openvalue":predictedOpen,"lowhigh":lowhigh})
+    return json.dumps({"currentValue":currentprice0,"openvalue":predictedopen0,"predictedTomorrow":predictedclose0})
 
 
 
@@ -43,25 +67,24 @@ def recieveData():
 def getFinancialData(symbol, Day_amount):
         stocks = [symbol]
         endDate = datetime.now().date()
-        startDate = (endDate - timedelta(days=int(Day_amount)))
+        startDate = (endDate - timedelta(days=int(5000)))
 
         df = web.DataReader(symbol,"yahoo",startDate,endDate)
         df =df[['Open','Low','High','Close']]
         return df
 
 def getCurrentData(data):
-    global currentprice
-    global lowprice
-    global highprice
+
+
     laststats = data.tail(1)
-    currentprice = laststats.Close.values[0]
-    lowprice = laststats.Low.values[0]
-    highprice = laststats.High.values[0]
+    currentprice0 = laststats.Close.values[0]
+    pricelow0 = laststats.Low.values[0]
+    pricehigh0 = laststats.High.values[0]
     getPredictedOpen(data)
-    return currentprice
+    return currentprice0,pricelow0,pricehigh0
 
 def getPredictedOpen(data):
-    global predictedOpen
+
     df_predictOpen = data[['Low', 'High', 'Close', 'Open']]
     df_predictOpen.Open = df_predictOpen.Open.shift(-1)
 
@@ -85,15 +108,15 @@ def getPredictedOpen(data):
     # voorspellen openingswaarde nieuwe dag
     # return X_predictOpen
     # Berekenen added weights
-    lowpricex2 = lowprice**2
-    highpricex2 = highprice**2
-    prediction= (regr_open.predict([lowprice,lowpricex2,highprice,highpricex2,currentprice]))
-    predictedOpen = prediction[0][0]
+    lowpricex2 = pricelow0**2
+    highpricex2 = pricehigh0**2
+    prediction= (regr_open.predict([pricelow0,lowpricex2,pricehigh0,highpricex2,currentprice0]))
+    predictedopen0= prediction[0][0]
     getpredictedLowHigh(data)
-    return predictedOpen
+    return predictedopen0
 
 def getpredictedLowHigh(df):
-    global lowhigh
+
     df_predictLowHigh = df[['Close', 'Open', 'High', 'Low']]
     df_predictLowHigh.Close = df_predictLowHigh.Close.shift(1)
     df_predictLowHigh = df_predictLowHigh.ix[1:]
@@ -113,14 +136,18 @@ def getpredictedLowHigh(df):
     regr_LowHigh = linear_model.LinearRegression()
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
-    currentpricex2 = currentprice **2
-    currentpricex3 = currentprice**3
-    predictedopenx2 = predictedOpen**2
-    predictedopenx3 = predictedOpen**3
-    lowhigh = regr_LowHigh.predict([[currentprice,currentpricex2,currentpricex3,predictedOpen,predictedopenx2,predictedopenx3]])
-    return lowhigh
+    currentpricex2 = currentprice0 **2
+    currentpricex3 = currentprice0**3
+    predictedopenx2 = predictedopen0**2
+    predictedopenx3 = predictedopen0**3
+    lowhigh = regr_LowHigh.predict([[currentprice0,currentpricex2,currentpricex3,predictedopen0,predictedopenx2,predictedopenx3]])
+    pricehigh0= lowhigh[0][0]
+    pricelow0 = lowhigh[0][1]
+    getpredictedClose(df)
+    return pricehigh0,pricelow0
 
 def getpredictedClose(data):
+
     df_predictClose = data[['Open','Low','High','Close']]
 
     # add weights to regression
@@ -139,7 +166,16 @@ def getpredictedClose(data):
     regr_Close = linear_model.LinearRegression()
     regr_Close.fit(X_predictClose_train,Y_predictClose_train)
     score_open=regr_Close.score(X_predictClose_test,Y_predictClose_test)
-    return score_open
+
+    openx2 = predictedopen0**2
+    lowpricex2 = pricelow0**2
+    highpricex2 = pricehigh0**2
+
+
+    predictedclose0 = regr_Close.predict(([[predictedopen0,openx2,pricelow0,lowpricex2,pricehigh0,highpricex2]]))
+    predictedclose0 = predictedclose0[0][0]
+
+    return predictedclose0
 
 
 

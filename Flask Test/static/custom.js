@@ -204,9 +204,10 @@ var details = {
         success : function(response){
                 value = JSON.parse(response)
                 var trToday = document.getElementById("today")
-                trToday.innerHTML = value.currentValue
-                openvalue = value.openpricetmrw
-//                openvalue = openvalue.replace(/[\[\]']+/g,'')
+                var trTomorrow = document.getElementById("+1day")
+                trToday.innerHTML = (value.currentValue).toFixed(4)
+                trTomorrow.innerHTML = Math.round(value.predictedTomorrow*100)/100
+
                 console.log(response)
 
 
