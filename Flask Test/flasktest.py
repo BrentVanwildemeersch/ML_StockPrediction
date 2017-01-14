@@ -91,41 +91,10 @@ def getFinancialData(symbol, Day_amount):
 
         # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
 
-# opzetten van neuraal netwerk
-        X_total =df.ix[:,0:3]
-        Y_total =df.ix[:,3:4]
-        X_total_train, X_total_test, Y_total_train,Y_total_test = train_test_split(X_total,Y_total,test_size=0.3)
-
-#
-#         # Network Parameters
-#         h = 45
-#         n_input  = 3  #number of neurons in the input layer
-#         n_output = 1 #number of neurons in the output layer
-#         layers = [n_input,h,h,h,h,h,h,h,h,h,n_output]
-#         mlpr = MLPR(layers,maxItr=1200,tol=0.4,reg=0.01,verbose=True)
-#
-#         # Learn the data
-#         mlpr.fit(X_total_train,Y_total_train)
-#         # Y_total_predicted =mlpr.predict(X_total_test)
-#
-# #         plot the results
-#         mlpr.
-#
-#
-#         # return  df
-#         return mlpr.predict([[42.049999,38.000000,45.000000]])
+# multiple regression to predict trend in stock market
 
 
-# second test neural network with keras
 
-        # Y_total_test = to_categorical(X_total_test,10)
-        # Y_total_train = to_categorical(X_total_train,10)
-        model=Sequential()
-        model.add(LSTM(4,input_dim=1))
-        model.add(Dense(1))
-        model.compile(loss="mean_squared_error",optimizer="adam")
-        # model.fit(X_total_train,Y_total_train,nb_epoch=500,validation_split=0.2,batch_size=200,verbose=0)
-        return None
 
 def multilayer_perceptron (x,weights,biases):
     # hidden layer with relu activation
