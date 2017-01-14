@@ -206,7 +206,7 @@ var details = {
                 var trToday = document.getElementById("today")
                 var trTomorrow = document.getElementById("+1day")
                 trToday.innerHTML = (value.currentValue).toFixed(4)
-                trTomorrow.innerHTML = Math.round(value.predictedTomorrow*100)/100
+                trTomorrow.innerHTML = Math.round(value.predictedclose0*100)/100
 
                 console.log(response)
 
