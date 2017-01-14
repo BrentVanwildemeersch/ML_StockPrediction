@@ -84,27 +84,13 @@ def getpredictedLowHigh(df):
     regr_LowHigh = linear_model.LinearRegression()
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
+
+    # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
     return
 
 def getpreditedClose():
 
     return
-
-# voorspellen van de openingswaarde van het aandeel
-
-
-
-
-# voorspellen van de low en high variabelen van de nieuwe dag
-
-
-
-
-
-
-        # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
-
-# multiple regression to predict trend in stock market
 
 
 
@@ -121,18 +107,6 @@ def multilayer_perceptron (x,weights,biases):
     # #output layer with linear activation
     outlayer = tf.matmul(layer2,weights['out']) + biases['out']
     return outlayer
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
