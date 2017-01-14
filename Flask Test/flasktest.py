@@ -49,7 +49,7 @@ def recieveData():
 
 
 
-    return json.dumps({"pricelow":pricelow1,"currentValue":currentprice0,"predictedclose0":predictedclose0,"predictedclose1":predictedclose1})
+    return json.dumps({"currentValue":currentprice0,"predictedclose0":predictedclose0,"predictedclose1":predictedclose1})
 
 
 
@@ -123,27 +123,28 @@ def getPredictedOpen(data):
         prediction= (regr_open.predict([pricelow0,lowpricex2,pricehigh0,highpricex2,currentprice0]))
         predictedopen0= prediction[0][0]
         getpredictedLowHigh(data)
-    elif switchvalue==2:
-        predictedopen2 = 0
-        lowpricex2 = pricelow1 ** 2
-        highpricex2 = pricehigh1 ** 2
-        prediction = (regr_open.predict([pricelow1, lowpricex2, pricehigh1, highpricex2, currentprice1]))
-        predictedopen1 = prediction[0][0]
-        getpredictedLowHigh(data)
-    elif switchvalue==3:
-        predictedopen3 = 0
-        lowpricex2 = pricelow2 ** 2
-        highpricex2 = pricehigh2 ** 2
-        prediction = (regr_open.predict([pricelow2, lowpricex2, pricehigh2, highpricex2, currentprice2]))
-        predictedopen0 = prediction[0][0]
-        getpredictedLowHigh(data)
-    elif switchvalue==4:
-        predictedopen2 = 0
-        lowpricex2 = pricelow3 ** 2
-        highpricex2 = pricehigh3 ** 2
-        prediction = (regr_open.predict([pricelow3, lowpricex2, pricehigh3, highpricex2, currentprice3]))
-        predictedopen0 = prediction[0][0]
-        getpredictedLowHigh(data)
+
+    # elif switchvalue==2:
+    #     predictedopen2 = 0
+    #     lowpricex2 = pricelow1 ** 2
+    #     highpricex2 = pricehigh1 ** 2
+    #     prediction = (regr_open.predict([pricelow1, lowpricex2, pricehigh1, highpricex2, currentprice1]))
+    #     predictedopen1 = prediction[0][0]
+    #     getpredictedLowHigh(data)
+    # elif switchvalue==3:
+    #     predictedopen3 = 0
+    #     lowpricex2 = pricelow2 ** 2
+    #     highpricex2 = pricehigh2 ** 2
+    #     prediction = (regr_open.predict([pricelow2, lowpricex2, pricehigh2, highpricex2, currentprice2]))
+    #     predictedopen0 = prediction[0][0]
+    #     getpredictedLowHigh(data)
+    # elif switchvalue==4:
+    #     predictedopen2 = 0
+    #     lowpricex2 = pricelow3 ** 2
+    #     highpricex2 = pricehigh3 ** 2
+    #     prediction = (regr_open.predict([pricelow3, lowpricex2, pricehigh3, highpricex2, currentprice3]))
+    #     predictedopen0 = prediction[0][0]
+    #     getpredictedLowHigh(data)
 
 
 def getpredictedLowHigh(df):
@@ -179,40 +180,40 @@ def getpredictedLowHigh(df):
         pricelow0 = lowhigh[0][1]
         pricelow1 = pricelow0
         getpredictedClose(df)
-    elif switchvalue==2:
-        currentpricex2 = currentprice1 ** 2
-        currentpricex3 = currentprice1 ** 3
-        predictedopenx2 = predictedopen1 ** 2
-        predictedopenx3 = predictedopen1 ** 3
-        lowhigh = regr_LowHigh.predict(
-            [[currentprice1, currentpricex2, currentpricex3, predictedopen1, predictedopenx2, predictedopenx3]])
-        pricehigh1 = lowhigh[0][0]
-        pricehigh2 = pricehigh1
-        pricelow1 = lowhigh[0][1]
-        pricelow2 = pricelow1
-        getpredictedClose(df)
-    elif switchvalue == 3:
-        currentpricex2 = currentprice2 ** 2
-        currentpricex3 = currentprice2 ** 3
-        predictedopenx2 = predictedopen2 ** 2
-        predictedopenx3 = predictedopen2 ** 3
-        lowhigh = regr_LowHigh.predict(
-            [[currentprice2, currentpricex2, currentpricex3, predictedopen2, predictedopenx2, predictedopenx3]])
-        pricehigh2 = lowhigh[0][0]
-        pricehigh3 = pricehigh2
-        pricelow2 = lowhigh[0][1]
-        pricelow3 = pricelow2
-        getpredictedClose(df)
-    elif switchvalue==4:
-        currentpricex2 = currentprice3 ** 2
-        currentpricex3 = currentprice3 ** 3
-        predictedopenx2 = predictedopen3 ** 2
-        predictedopenx3 = predictedopen3 ** 3
-        lowhigh = regr_LowHigh.predict(
-            [[currentprice3, currentpricex2, currentpricex3, predictedopen3, predictedopenx2, predictedopenx3]])
-        pricehigh0 = lowhigh[0][0]
-        pricelow0 = lowhigh[0][1]
-        getpredictedClose(df)
+    # elif switchvalue==2:
+    #     currentpricex2 = currentprice1 ** 2
+    #     currentpricex3 = currentprice1 ** 3
+    #     predictedopenx2 = predictedopen1 ** 2
+    #     predictedopenx3 = predictedopen1 ** 3
+    #     lowhigh = regr_LowHigh.predict(
+    #         [[currentprice1, currentpricex2, currentpricex3, predictedopen1, predictedopenx2, predictedopenx3]])
+    #     pricehigh1 = lowhigh[0][0]
+    #     pricehigh2 = pricehigh1
+    #     pricelow1 = lowhigh[0][1]
+    #     pricelow2 = pricelow1
+    #     getpredictedClose(df)
+    # elif switchvalue == 3:
+    #     currentpricex2 = currentprice2 ** 2
+    #     currentpricex3 = currentprice2 ** 3
+    #     predictedopenx2 = predictedopen2 ** 2
+    #     predictedopenx3 = predictedopen2 ** 3
+    #     lowhigh = regr_LowHigh.predict(
+    #         [[currentprice2, currentpricex2, currentpricex3, predictedopen2, predictedopenx2, predictedopenx3]])
+    #     pricehigh2 = lowhigh[0][0]
+    #     pricehigh3 = pricehigh2
+    #     pricelow2 = lowhigh[0][1]
+    #     pricelow3 = pricelow2
+    #     getpredictedClose(df)
+    # elif switchvalue==4:
+    #     currentpricex2 = currentprice3 ** 2
+    #     currentpricex3 = currentprice3 ** 3
+    #     predictedopenx2 = predictedopen3 ** 2
+    #     predictedopenx3 = predictedopen3 ** 3
+    #     lowhigh = regr_LowHigh.predict(
+    #         [[currentprice3, currentpricex2, currentpricex3, predictedopen3, predictedopenx2, predictedopenx3]])
+    #     pricehigh0 = lowhigh[0][0]
+    #     pricelow0 = lowhigh[0][1]
+    #     getpredictedClose(df)
 
 
 def getpredictedClose(data):
@@ -250,36 +251,36 @@ def getpredictedClose(data):
         predictedclose0 = predictedclose0[0][0]
         currentprice1= predictedclose0
         return currentprice1,predictedclose0
-    elif switchvalue==2:
-        predictedclose2=0
-        openx2 = predictedopen1 ** 2
-        lowpricex2 = pricelow1 ** 2
-        highpricex2 = pricehigh1 ** 2
-        predictedclose1 = regr_Close.predict(
-            ([[predictedopen1, openx2, pricelow1, lowpricex2, pricehigh1, highpricex2]]))
-        predictedclose1 = predictedclose1[0][0]
-        predictedclose0 = 0
-        return predictedclose1
-    elif switchvalue==3:
-        predictedclose3
-        openx2 = predictedopen2 ** 2
-        lowpricex2 = pricelow2 ** 2
-        highpricex2 = pricehigh2 ** 2
-
-        predictedclose2 = regr_Close.predict(
-            ([[predictedopen2, openx2, pricelow2, lowpricex2, pricehigh2, highpricex2]]))
-        predictedclose2 = predictedclose2[0][0]
-
-    elif switchvalue==4 :
-        openx2 = predictedopen3 ** 2
-        lowpricex2 = pricelow3 ** 2
-        highpricex2 = pricehigh3 ** 2
-
-        predictedclose3 = regr_Close.predict(
-            ([[predictedopen3, openx2, pricelow3, lowpricex2, pricehigh3, highpricex2]]))
-        predictedclose3 = predictedclose3[0][0]
-
-
+    # elif switchvalue==2:
+    #     predictedclose2=0
+    #     openx2 = predictedopen1 ** 2
+    #     lowpricex2 = pricelow1 ** 2
+    #     highpricex2 = pricehigh1 ** 2
+    #     predictedclose1 = regr_Close.predict(
+    #         ([[predictedopen1, openx2, pricelow1, lowpricex2, pricehigh1, highpricex2]]))
+    #     predictedclose1 = predictedclose1[0][0]
+    #     predictedclose0 = 0
+    #     return predictedclose1
+    # elif switchvalue==3:
+    #     predictedclose3
+    #     openx2 = predictedopen2 ** 2
+    #     lowpricex2 = pricelow2 ** 2
+    #     highpricex2 = pricehigh2 ** 2
+    #
+    #     predictedclose2 = regr_Close.predict(
+    #         ([[predictedopen2, openx2, pricelow2, lowpricex2, pricehigh2, highpricex2]]))
+    #     predictedclose2 = predictedclose2[0][0]
+    #
+    # elif switchvalue==4 :
+    #     openx2 = predictedopen3 ** 2
+    #     lowpricex2 = pricelow3 ** 2
+    #     highpricex2 = pricehigh3 ** 2
+    #
+    #     predictedclose3 = regr_Close.predict(
+    #         ([[predictedopen3, openx2, pricelow3, lowpricex2, pricehigh3, highpricex2]]))
+    #     predictedclose3 = predictedclose3[0][0]
+    #
+    #
 
 
 

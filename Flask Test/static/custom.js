@@ -206,8 +206,20 @@ var details = {
                 var trToday = document.getElementById("today")
                 var trTomorrow = document.getElementById("+1day")
                 trToday.innerHTML = (value.currentValue).toFixed(4)
-                trTomorrow.innerHTML = Math.round(value.predictedclose0*100)/100
 
+
+                console.log(value.currentValue)
+                console.log(value.predictedclose0)
+                if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+                {
+                trTomorrow.innerHTML ="+"
+                trTomorrow.style.color="green"
+                trTomorrow.style.fontSize="25px"
+                }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25xp";
+                }
                 console.log(response)
 
 
