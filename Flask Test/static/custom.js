@@ -202,7 +202,7 @@ var details = {
         data: JSON.stringify(details,null,'\t'),
         contentType:"application/json; charset=utf-8",
         success : function(response){
-
+            console.log("Response")
 
         },
         error: function(error){
