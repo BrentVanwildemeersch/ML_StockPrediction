@@ -26,8 +26,17 @@ def recieveData():
     symbol = request.json['code']
     time = request.json['time']
     data = getFinancialData(symbol,time)
+    predictedOpen = getPredictedOpen(data)
+    predictLowHigh = getpredictedLowHigh(data)
+    predictClose = getpredictedClose(data)
+    currentprice = getCurrentData(data)
 
-    return str()
+
+    return str(currentprice)
+
+
+
+
 
 def getFinancialData(symbol, Day_amount):
         stocks = [symbol]
@@ -38,8 +47,14 @@ def getFinancialData(symbol, Day_amount):
         df =df[['Open','Low','High','Close']]
         return df
 
+def getCurrentData(data):
+    laststats = data.tail(1)
+    currentprice = laststats.Close
+
+    return currentprice
+
 def getPredictedOpen(data):
-    df_predictOpen = df[['Low', 'High', 'Close', 'Open']]
+    df_predictOpen = data[['Low', 'High', 'Close', 'Open']]
     df_predictOpen.Open = df_predictOpen.Open.shift(-1)
 
     df_predictOpen = df_predictOpen.ix[:-1]
@@ -61,8 +76,8 @@ def getPredictedOpen(data):
 
     # voorspellen openingswaarde nieuwe dag
     # return X_predictOpen
-    # return regr_open.predict([[41.119999,1690.854318,41.830002,1749.749067,41.599998]])
-    return
+    return regr_open.predict([[41.119999,1690.854318,41.830002,1749.749067,41.599998]])
+
 
 def getpredictedLowHigh(df):
     df_predictLowHigh = df[['Close', 'Open', 'High', 'Low']]
@@ -85,12 +100,29 @@ def getpredictedLowHigh(df):
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
 
-    # return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
-    return
+    return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
 
-def getpreditedClose():
 
-    return
+def getpredictedClose(data):
+    df_predictClose = data[['Open','Low','High','Close']]
+
+    # add weights to regression
+    df_predictClose.insert(1,"Open x2", df_predictClose.Open**2)
+    df_predictClose.insert(3,"Low x2", df_predictClose.Low**2)
+    df_predictClose.insert(5,"High x2", df_predictClose.High**2)
+    # multiple regression on
+    X_predictClose = df_predictClose.ix[:,0:6]
+    Y_predictClose = df_predictClose.ix[:,6:7]
+
+
+
+
+    X_predictClose_train,X_predictClose_test,Y_predictClose_train,Y_predictClose_test = train_test_split(X_predictClose,Y_predictClose, test_size=0.4)
+
+    regr_Close = linear_model.LinearRegression()
+    regr_Close.fit(X_predictClose_train,Y_predictClose_train)
+    score_open=regr_Close.score(X_predictClose_test,Y_predictClose_test)
+    return score_open
 
 
 

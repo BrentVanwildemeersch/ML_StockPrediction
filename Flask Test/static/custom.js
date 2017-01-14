@@ -202,12 +202,11 @@ var details = {
         data: JSON.stringify(details,null,'\t'),
         contentType:"application/json; charset=utf-8",
         success : function(response){
-            console.log(response)
 
 
         },
         error: function(error){
-            console.log(error)
+            console.log("Error")
         }
     })
 }
