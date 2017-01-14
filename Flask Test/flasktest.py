@@ -35,7 +35,7 @@ def recieveData():
 
 
 
-    return json.dumps({"currentValue":currentprice,"openpricetmrw":predictedOpen,"lowhigh":lowhigh})
+    return json.dumps({"currentValue":currentprice,"openvalue":predictedOpen,"lowhigh":lowhigh})
 
 
 
@@ -87,7 +87,8 @@ def getPredictedOpen(data):
     # Berekenen added weights
     lowpricex2 = lowprice**2
     highpricex2 = highprice**2
-    predictedOpen = regr_open.predict([[lowprice,lowpricex2,highprice,highpricex2,currentprice]])
+    prediction= (regr_open.predict([lowprice,lowpricex2,highprice,highpricex2,currentprice]))
+    predictedOpen = prediction[0][0]
     getpredictedLowHigh(data)
     return predictedOpen
 
@@ -113,8 +114,10 @@ def getpredictedLowHigh(df):
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
     currentpricex2 = currentprice **2
+    currentpricex3 = currentprice**3
     predictedopenx2 = predictedOpen**2
-    lowhigh = np.array_str(regr_LowHigh.predict([[currentprice,currentpricex2,predictedOpen,predictedopenx2]]))
+    predictedopenx3 = predictedOpen**3
+    lowhigh = regr_LowHigh.predict([[currentprice,currentpricex2,currentpricex3,predictedOpen,predictedopenx2,predictedopenx3]])
     return lowhigh
 
 def getpredictedClose(data):

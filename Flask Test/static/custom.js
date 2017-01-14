@@ -206,9 +206,9 @@ var details = {
                 var trToday = document.getElementById("today")
                 trToday.innerHTML = value.currentValue
                 openvalue = value.openpricetmrw
-                openvalue = openvalue.replace(/[\[\]']+/g,'')
-                console.log(openvalue)
-                console.log(value.lowhigh)
+//                openvalue = openvalue.replace(/[\[\]']+/g,'')
+                console.log(response)
+
 
 
 
