@@ -202,7 +202,15 @@ var details = {
         data: JSON.stringify(details,null,'\t'),
         contentType:"application/json; charset=utf-8",
         success : function(response){
-            console.log("Response")
+                value = JSON.parse(response)
+                var trToday = document.getElementById("today")
+                trToday.innerHTML = value.currentValue
+                openvalue = value.openpricetmrw
+                openvalue = openvalue.replace(/[\[\]']+/g,'')
+                console.log(openvalue)
+                console.log(value.lowhigh)
+
+
 
         },
         error: function(error){

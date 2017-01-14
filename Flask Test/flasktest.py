@@ -14,6 +14,11 @@ from keras.layers import LSTM
 from TFMLP import MLPR
 import matplotlib.pyplot as mpl
 import numpy as np
+import json
+
+
+
+# declaratie globale variabelen
 
 app = Flask(__name__)
 
@@ -26,14 +31,11 @@ def recieveData():
     symbol = request.json['code']
     time = request.json['time']
     data = getFinancialData(symbol,time)
-    predictedOpen = getPredictedOpen(data)
-    predictLowHigh = getpredictedLowHigh(data)
-    predictClose = getpredictedClose(data)
     currentprice = getCurrentData(data)
 
 
-    return str(currentprice)
 
+    return json.dumps({"currentValue":currentprice,"openpricetmrw":predictedOpen,"lowhigh":lowhigh})
 
 
 
@@ -48,12 +50,18 @@ def getFinancialData(symbol, Day_amount):
         return df
 
 def getCurrentData(data):
+    global currentprice
+    global lowprice
+    global highprice
     laststats = data.tail(1)
-    currentprice = laststats.Close
-
+    currentprice = laststats.Close.values[0]
+    lowprice = laststats.Low.values[0]
+    highprice = laststats.High.values[0]
+    getPredictedOpen(data)
     return currentprice
 
 def getPredictedOpen(data):
+    global predictedOpen
     df_predictOpen = data[['Low', 'High', 'Close', 'Open']]
     df_predictOpen.Open = df_predictOpen.Open.shift(-1)
 
@@ -76,10 +84,15 @@ def getPredictedOpen(data):
 
     # voorspellen openingswaarde nieuwe dag
     # return X_predictOpen
-    return regr_open.predict([[41.119999,1690.854318,41.830002,1749.749067,41.599998]])
-
+    # Berekenen added weights
+    lowpricex2 = lowprice**2
+    highpricex2 = highprice**2
+    predictedOpen = regr_open.predict([[lowprice,lowpricex2,highprice,highpricex2,currentprice]])
+    getpredictedLowHigh(data)
+    return predictedOpen
 
 def getpredictedLowHigh(df):
+    global lowhigh
     df_predictLowHigh = df[['Close', 'Open', 'High', 'Low']]
     df_predictLowHigh.Close = df_predictLowHigh.Close.shift(1)
     df_predictLowHigh = df_predictLowHigh.ix[1:]
@@ -99,9 +112,10 @@ def getpredictedLowHigh(df):
     regr_LowHigh = linear_model.LinearRegression()
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
-
-    return regr_LowHigh.predict([[26.809999,718.7760464,19270.38508,27.0000,729,19683]])
-
+    currentpricex2 = currentprice **2
+    predictedopenx2 = predictedOpen**2
+    lowhigh = np.array_str(regr_LowHigh.predict([[currentprice,currentpricex2,predictedOpen,predictedopenx2]]))
+    return lowhigh
 
 def getpredictedClose(data):
     df_predictClose = data[['Open','Low','High','Close']]
