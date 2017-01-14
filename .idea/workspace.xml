@@ -4,7 +4,6 @@
     <list default="true" id="e2e22e57-67f5-4db0-8ab7-e3056d729ca4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Flask Test/flasktest.py" afterPath="$PROJECT_DIR$/Flask Test/flasktest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Flask Test/static/custom.js" afterPath="$PROJECT_DIR$/Flask Test/static/custom.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,11 +21,11 @@
       <file leaf-file-name="flasktest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask Test/flasktest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="107" column="43" lean-forward="true" selection-start-line="107" selection-start-column="43" selection-end-line="107" selection-end-column="43" />
+            <state relative-caret-position="540">
+              <caret line="149" column="26" lean-forward="false" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-                <element signature="e#5731#6125#0" expanded="false" />
+                <element signature="e#5816#6210#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -488,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484427188671</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Edit code form multiple predictions&#10;">
+      <created>1484430606433</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1484430606433</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -556,11 +562,19 @@
     <MESSAGE value="Set data in table" />
     <MESSAGE value="Predict tomorrow" />
     <MESSAGE value="remove brackets from array" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove brackets from array" />
+    <MESSAGE value="Edit code form multiple predictions&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit code form multiple predictions&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Flask Test/flasktest.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -571,7 +585,7 @@
           <caret line="51" column="34" lean-forward="false" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -614,7 +628,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,7 +671,7 @@
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -700,7 +714,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -743,7 +757,7 @@
           <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -793,7 +807,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -843,7 +857,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -893,7 +907,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -943,7 +957,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -986,7 +1000,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1029,7 +1043,7 @@
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1072,7 +1086,7 @@
           <caret line="55" column="25" lean-forward="false" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1094,7 +1108,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1137,7 +1151,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1223,11 +1237,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask Test/flasktest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="107" column="43" lean-forward="true" selection-start-line="107" selection-start-column="43" selection-end-line="107" selection-end-column="43" />
+        <state relative-caret-position="540">
+          <caret line="149" column="26" lean-forward="false" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5731#6125#0" expanded="false" />
+            <element signature="e#5816#6210#0" expanded="false" />
           </folding>
         </state>
       </provider>

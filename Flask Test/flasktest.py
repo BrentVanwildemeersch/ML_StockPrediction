@@ -16,31 +16,13 @@ import matplotlib.pyplot as mpl
 import numpy as np
 import json
 
-global currentprice0
-global currentprice1
-global currentprice2
-global currentprice3
-global currentprice4
 
-global predictedopen0
-global predictedopen1
-global predictedopen2
-global predictedopen3
 
-global pricelow0
-global pricelow1
-global pricelow2
-global pricelow3
 
-global pricehigh0
-global pricehigh1
-global pricehigh2
-global pricehigh3
 
-global predictedclose0
-global predictedclose1
-global predictedclose2
-global predictedclose3
+
+
+
 
 # declaratie globale variabelen
 
@@ -74,7 +56,19 @@ def getFinancialData(symbol, Day_amount):
         return df
 
 def getCurrentData(data):
-
+    global currentprice0
+    global currentprice1
+    global currentprice2
+    global currentprice3
+    global currentprice4
+    global pricelow0
+    global pricelow1
+    global pricelow2
+    global pricelow3
+    global pricehigh0
+    global pricehigh1
+    global pricehigh2
+    global pricehigh3
 
     laststats = data.tail(1)
     currentprice0 = laststats.Close.values[0]
@@ -84,7 +78,10 @@ def getCurrentData(data):
     return currentprice0,pricelow0,pricehigh0
 
 def getPredictedOpen(data):
-
+    global predictedopen0
+    global predictedopen1
+    global predictedopen2
+    global predictedopen3
     df_predictOpen = data[['Low', 'High', 'Close', 'Open']]
     df_predictOpen.Open = df_predictOpen.Open.shift(-1)
 
@@ -147,6 +144,10 @@ def getpredictedLowHigh(df):
     return pricehigh0,pricelow0
 
 def getpredictedClose(data):
+    global predictedclose0
+    global predictedclose1
+    global predictedclose2
+    global predictedclose3
 
     df_predictClose = data[['Open','Low','High','Close']]
 
