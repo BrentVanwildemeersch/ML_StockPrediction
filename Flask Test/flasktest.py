@@ -167,14 +167,43 @@ def getpredictedClose(data):
     regr_Close = linear_model.LinearRegression()
     regr_Close.fit(X_predictClose_train,Y_predictClose_train)
     score_open=regr_Close.score(X_predictClose_test,Y_predictClose_test)
+    if predictedopen0!=0 and predictedopen1==0:
+        openx2 = predictedopen0 ** 2
+        lowpricex2 = pricelow0 ** 2
+        highpricex2 = pricehigh0 ** 2
 
-    openx2 = predictedopen0**2
-    lowpricex2 = pricelow0**2
-    highpricex2 = pricehigh0**2
+        predictedclose0 = regr_Close.predict(
+            ([[predictedopen0, openx2, pricelow0, lowpricex2, pricehigh0, highpricex2]]))
+        predictedclose0 = predictedclose0[0][0]
+    elif predictedopen1!=0 and predictedopen2==0:
+        openx2 = predictedopen1 ** 2
+        lowpricex2 = pricelow1 ** 2
+        highpricex2 = pricehigh1 ** 2
+
+        predictedclose1 = regr_Close.predict(
+            ([[predictedopen1, openx2, pricelow1, lowpricex2, pricehigh1, highpricex2]]))
+        predictedclose1 = predictedclose1[0][0]
+        return
+    elif predictedopen2!= 0 and predictedopen3==0:
+        openx2 = predictedopen2 ** 2
+        lowpricex2 = pricelow2 ** 2
+        highpricex2 = pricehigh2 ** 2
+
+        predictedclose2 = regr_Close.predict(
+            ([[predictedopen2, openx2, pricelow2, lowpricex2, pricehigh2, highpricex2]]))
+        predictedclose2 = predictedclose2[0][0]
+        return
+    elif predictedopen3!=0 :
+        openx2 = predictedopen3 ** 2
+        lowpricex2 = pricelow3 ** 2
+        highpricex2 = pricehigh3 ** 2
+
+        predictedclose3 = regr_Close.predict(
+            ([[predictedopen3, openx2, pricelow3, lowpricex2, pricehigh3, highpricex2]]))
+        predictedclose3 = predictedclose3[0][0]
+        return
 
 
-    predictedclose0 = regr_Close.predict(([[predictedopen0,openx2,pricelow0,lowpricex2,pricehigh0,highpricex2]]))
-    predictedclose0 = predictedclose0[0][0]
 
     return predictedclose0
 
