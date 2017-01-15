@@ -1,6 +1,8 @@
 /**
  * Created by Student on 5/01/2017.
  */
+
+ var close, low , high, predictedclose,predictedlow,predictedhigh,closed_5day
 function DrawChart (code,time) {
     var years = $("#input_Duration option:selected").text();
 
@@ -203,26 +205,454 @@ var details = {
         contentType:"application/json; charset=utf-8",
         success : function(response){
                 value = JSON.parse(response)
+
+                var closed_1day = value.data_closed1day
+                var closed_2day = value.data_closed2day
+                var closed_3day = value.data_closed3day
+                var closed_4day = value.data_closed4day
+                var closed_5day = value.data_closed5day
+                var dataPredict_high = value.data_predictHigh
+                var dataPredict_low = value.data_predictlow
+                var current = value.currentValue
+                predictedhigh = dataPredict_high
+                predictedlow = dataPredict_low
+                predictedclose = closed_5day
+
+                close_4day()
+
+
+                if(parseFloat(closed_1day)<parseFloat(current))
+                {
+
+                     var trToday = document.getElementById("close_Today")
+                     trToday.innerHTML ="+"
+                     trToday.style.color="green"
+                     trToday.style.fontSize="25px"
+                }
+                else {
+
+                var trToday = document.getElementById("close_Today")
+                     trToday.innerHTML ="-"
+                     trToday.style.color="red"
+                     trToday.style.fontSize="25px"
+                }
+                 if(parseFloat(closed_2day)<parseFloat(closed_1day))
+                {
+
+                     var trToday = document.getElementById("close_1day")
+                     trToday.innerHTML ="+"
+                     trToday.style.color="green"
+                     trToday.style.fontSize="25px"
+                }
+                else {
+
+                var trToday = document.getElementById("close_1day")
+                     trToday.innerHTML ="-"
+                     trToday.style.color="red"
+                     trToday.style.fontSize="25px"
+                }
+
+                  if(parseFloat(closed_3day)<parseFloat(closed_2day))
+                {
+
+                     var trToday = document.getElementById("close_2day")
+                     trToday.innerHTML ="+"
+                     trToday.style.color="green"
+                     trToday.style.fontSize="25px"
+                }
+                else {
+
+                var trToday = document.getElementById("close_2day")
+                     trToday.innerHTML ="-"
+                     trToday.style.color="red"
+                     trToday.style.fontSize="25px"
+                }
+                  if(parseFloat(closed_4day)<parseFloat(closed_3day))
+                {
+
+                     var trToday = document.getElementById("close_3day")
+                     trToday.innerHTML ="+"
+                     trToday.style.color="green"
+                     trToday.style.fontSize="25px"
+                }
+                else {
+
+                var trToday = document.getElementById("close_3day")
+                     trToday.innerHTML ="-"
+                     trToday.style.color="red"
+                     trToday.style.fontSize="25px"
+                }
+                    if(parseFloat(closed_5day)<parseFloat(closed_4day))
+                {
+
+                     var trToday = document.getElementById("close_4day")
+                     trToday.innerHTML ="+"
+                     trToday.style.color="green"
+                     trToday.style.fontSize="25px"
+                }
+                else {
+
+                var trToday = document.getElementById("close_4day")
+                     trToday.innerHTML ="-"
+                     trToday.style.color="red"
+                     trToday.style.fontSize="25px"
+                }
                 var trToday = document.getElementById("today")
                 var trTomorrow = document.getElementById("+1day")
                 trToday.innerHTML = (value.currentValue).toFixed(4)
+                close = value.predictedclose0;
+                high = value.pricehigh;
+                low = value.pricelow
+                setTimeout(showPrediction,1000)
 
-
-                console.log(value.currentValue)
-                console.log(value.predictedclose0)
+                function showPrediction(){
                 if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
                 {
+
                 trTomorrow.innerHTML ="+"
                 trTomorrow.style.color="green"
                 trTomorrow.style.fontSize="25px"
                 }else {
                 trTomorrow.innerHTML = "-"
                 trTomorrow.style.color="red"
-                trTomorrow.style.fontSize = "25xp";
-                }
+                trTomorrow.style.fontSize = "25px";
+                }}
                 console.log(response)
 
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
 
+function get_2day(){
+    var details = {
+        "close": close,
+        "high" :high,
+        "low" :low
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            close = value.predictedclose0
+            low = value.pricelow
+            high = value.pricehigh
+
+            var trTomorrow = document.getElementById("+2day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+
+function get_3day(){
+    var details = {
+        "close": close,
+        "high" :high,
+        "low" :low
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            close = value.predictedclose0
+            low = value.pricelow
+            high = value.pricehigh
+
+            var trTomorrow = document.getElementById("+3day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+
+function get_4day(){
+    var details = {
+        "close": close,
+        "high" :high,
+        "low" :low
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            close = value.predictedclose0
+            low = value.pricelow
+            high = value.pricehigh
+
+            var trTomorrow = document.getElementById("+4day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+
+function close_4day(){
+    var details = {
+        "close": predictedclose,
+        "high" :predictedhigh,
+        "low" :predictedlow
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            predictedclose = value.predictedclose0
+            predictedlow = value.pricelow
+            predictedhigh = value.pricehigh
+
+            var trTomorrow = document.getElementById("predicted_4day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+            close_3day()
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+function close_3day(){
+    var details = {
+        "close": predictedclose,
+        "high" :predictedhigh,
+        "low" :predictedlow
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            predictedclose = value.predictedclose0
+            predictedlow = value.pricelow
+            predictedhigh = value.pricehigh
+
+            var trTomorrow = document.getElementById("predicted_3day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+            close_2day()
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+
+function close_2day(){
+    var details = {
+        "close": predictedclose,
+        "high" :predictedhigh,
+        "low" :predictedlow
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            predictedclose = value.predictedclose0
+            predictedlow = value.pricelow
+            predictedhigh = value.pricehigh
+
+            var trTomorrow = document.getElementById("predicted_2day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+            close_1day()
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+function close_1day(){
+    var details = {
+        "close": predictedclose,
+        "high" :predictedhigh,
+        "low" :predictedlow
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            predictedclose = value.predictedclose0
+            predictedlow = value.pricelow
+            predictedhigh = value.pricehigh
+
+            var trTomorrow = document.getElementById("predicted_1day")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
+            close_Today()
+
+
+        },
+        error: function(error){
+            console.log("Error")
+        }
+    })
+}
+
+function close_Today(){
+    var details = {
+        "close": predictedclose,
+        "high" :predictedhigh,
+        "low" :predictedlow
+    }
+    $.ajax({
+        url: "/getNextDay",
+        data: JSON.stringify(details,null,'\t'),
+        type:"POST",
+        contentType:"application/json; charset=utf-8",
+        success : function(response){
+            value = JSON.parse(response)
+            predictedclose = value.predictedclose0
+            predictedlow = value.pricelow
+            predictedhigh = value.pricehigh
+
+            var trTomorrow = document.getElementById("predicted_Today")
+
+            setTimeout(showPrediction,1000)
+            function showPrediction(){
+            if(parseFloat(value.predictedclose0)>parseFloat(value.currentValue))
+             {
+              trTomorrow.innerHTML ="+"
+              trTomorrow.style.color="green"
+              trTomorrow.style.fontSize="25px"
+             }else {
+                trTomorrow.innerHTML = "-"
+                trTomorrow.style.color="red"
+                trTomorrow.style.fontSize = "25px";
+                }
+            }
+            console.log(response)
 
 
         },

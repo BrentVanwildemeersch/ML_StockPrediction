@@ -15,15 +15,6 @@ from TFMLP import MLPR
 import matplotlib.pyplot as mpl
 import numpy as np
 import json
-
-
-
-
-
-
-
-
-
 # declaratie globale variabelen
 
 app = Flask(__name__)
@@ -34,24 +25,29 @@ def hello():
 
 @app.route("/receiveData", methods=['POST'])
 def recieveData():
+    global globaldata
+    global symbol
+    global time
     symbol = request.json['code']
     time = request.json['time']
-    data = getFinancialData(symbol,time)
-    global switchvalue
-    switchvalue =1
+    globaldata = getFinancialData(symbol,time)
+    getCurrentData(globaldata)
+    data_closed = getHistory(globaldata)
 
+    return json.dumps({"data_predictlow":dataPredict_low,"data_predictHigh":dataPredict_high,"data_closed1day":closed_1day,"data_closed2day":closed_2day,"data_closed3day":closed_3day,"data_closed4day":closed_4day,"data_closed5day":closed_5day,"currentValue":currentprice0,"predictedclose0":predictedclose0,"pricelow":predictedpricelow0,"pricehigh":predictedpricehigh0})
+@app.route("/getNextDay", methods=['Post'])
+def getNextDay():
 
-    for switchvalue in range(1,5):
-        getCurrentData(data)
-        switchvalue +=1
+    close = request.json['close']
+    high = request.json['high']
+    low = request.json['low']
+    currentprice0 = close
+    pricelow0 = low
+    pricehigh0=high
 
+    getCurrentData(globaldata)
 
-
-
-
-    return json.dumps({"currentValue":currentprice0,"predictedclose0":predictedclose0,"predictedclose1":predictedclose1})
-
-
+    return  json.dumps({"currentValue":currentprice0,"predictedclose0":predictedclose0,"pricelow":predictedpricelow0,"pricehigh":predictedpricehigh0})
 
 def getFinancialData(symbol, Day_amount):
         stocks = [symbol]
@@ -64,23 +60,9 @@ def getFinancialData(symbol, Day_amount):
 
 def getCurrentData(data):
     global currentprice0
-    currentprice0 = 0
-    currentprice1=0
-    currentprice2=0
-    currentprice3=0
-    currentprice4=0
-    global currentprice1
-    global currentprice2
-    global currentprice3
-    global currentprice4
     global pricelow0
-    global pricelow1
-    global pricelow2
-    global pricelow3
     global pricehigh0
-    global pricehigh1
-    global pricehigh2
-    global pricehigh3
+
 
     laststats = data.tail(1)
     currentprice0 = laststats.Close.values[0]
@@ -91,9 +73,7 @@ def getCurrentData(data):
 
 def getPredictedOpen(data):
     global predictedopen0
-    global predictedopen1
-    global predictedopen2
-    global predictedopen3
+
     df_predictOpen = data[['Low', 'High', 'Close', 'Open']]
     df_predictOpen.Open = df_predictOpen.Open.shift(-1)
 
@@ -116,38 +96,18 @@ def getPredictedOpen(data):
     regr_open = linear_model.LinearRegression()
     regr_open.fit(X_train, Y_train)
     score_open = regr_open.score(X_test, Y_test)
-    if switchvalue==1:
-        predictedopen1=0
-        lowpricex2 = pricelow0**2
-        highpricex2 = pricehigh0**2
-        prediction= (regr_open.predict([pricelow0,lowpricex2,pricehigh0,highpricex2,currentprice0]))
-        predictedopen0= prediction[0][0]
-        getpredictedLowHigh(data)
 
-    # elif switchvalue==2:
-    #     predictedopen2 = 0
-    #     lowpricex2 = pricelow1 ** 2
-    #     highpricex2 = pricehigh1 ** 2
-    #     prediction = (regr_open.predict([pricelow1, lowpricex2, pricehigh1, highpricex2, currentprice1]))
-    #     predictedopen1 = prediction[0][0]
-    #     getpredictedLowHigh(data)
-    # elif switchvalue==3:
-    #     predictedopen3 = 0
-    #     lowpricex2 = pricelow2 ** 2
-    #     highpricex2 = pricehigh2 ** 2
-    #     prediction = (regr_open.predict([pricelow2, lowpricex2, pricehigh2, highpricex2, currentprice2]))
-    #     predictedopen0 = prediction[0][0]
-    #     getpredictedLowHigh(data)
-    # elif switchvalue==4:
-    #     predictedopen2 = 0
-    #     lowpricex2 = pricelow3 ** 2
-    #     highpricex2 = pricehigh3 ** 2
-    #     prediction = (regr_open.predict([pricelow3, lowpricex2, pricehigh3, highpricex2, currentprice3]))
-    #     predictedopen0 = prediction[0][0]
-    #     getpredictedLowHigh(data)
+
+    lowpricex2 = pricelow0**2
+    highpricex2 = pricehigh0**2
+    prediction= (regr_open.predict([pricelow0,lowpricex2,pricehigh0,highpricex2,currentprice0]))
+    predictedopen0= prediction[0][0]
+    getpredictedLowHigh(data)
 
 
 def getpredictedLowHigh(df):
+    global predictedpricelow0
+    global predictedpricehigh0
 
     df_predictLowHigh = df[['Close', 'Open', 'High', 'Low']]
     df_predictLowHigh.Close = df_predictLowHigh.Close.shift(1)
@@ -169,58 +129,21 @@ def getpredictedLowHigh(df):
     regr_LowHigh.fit(X_predictLowHigh_train, Y_predictLowHigh_train)
     score_LowHigh = regr_LowHigh.score(X_predictLowHigh_test, Y_predictLowHigh_test)
 
-    if switchvalue ==1:
-        currentpricex2 = currentprice0 **2
-        currentpricex3 = currentprice0**3
-        predictedopenx2 = predictedopen0**2
-        predictedopenx3 = predictedopen0**3
-        lowhigh = regr_LowHigh.predict([[currentprice0,currentpricex2,currentpricex3,predictedopen0,predictedopenx2,predictedopenx3]])
-        pricehigh0= lowhigh[0][0]
-        pricehigh1= pricehigh0
-        pricelow0 = lowhigh[0][1]
-        pricelow1 = pricelow0
-        getpredictedClose(df)
-    # elif switchvalue==2:
-    #     currentpricex2 = currentprice1 ** 2
-    #     currentpricex3 = currentprice1 ** 3
-    #     predictedopenx2 = predictedopen1 ** 2
-    #     predictedopenx3 = predictedopen1 ** 3
-    #     lowhigh = regr_LowHigh.predict(
-    #         [[currentprice1, currentpricex2, currentpricex3, predictedopen1, predictedopenx2, predictedopenx3]])
-    #     pricehigh1 = lowhigh[0][0]
-    #     pricehigh2 = pricehigh1
-    #     pricelow1 = lowhigh[0][1]
-    #     pricelow2 = pricelow1
-    #     getpredictedClose(df)
-    # elif switchvalue == 3:
-    #     currentpricex2 = currentprice2 ** 2
-    #     currentpricex3 = currentprice2 ** 3
-    #     predictedopenx2 = predictedopen2 ** 2
-    #     predictedopenx3 = predictedopen2 ** 3
-    #     lowhigh = regr_LowHigh.predict(
-    #         [[currentprice2, currentpricex2, currentpricex3, predictedopen2, predictedopenx2, predictedopenx3]])
-    #     pricehigh2 = lowhigh[0][0]
-    #     pricehigh3 = pricehigh2
-    #     pricelow2 = lowhigh[0][1]
-    #     pricelow3 = pricelow2
-    #     getpredictedClose(df)
-    # elif switchvalue==4:
-    #     currentpricex2 = currentprice3 ** 2
-    #     currentpricex3 = currentprice3 ** 3
-    #     predictedopenx2 = predictedopen3 ** 2
-    #     predictedopenx3 = predictedopen3 ** 3
-    #     lowhigh = regr_LowHigh.predict(
-    #         [[currentprice3, currentpricex2, currentpricex3, predictedopen3, predictedopenx2, predictedopenx3]])
-    #     pricehigh0 = lowhigh[0][0]
-    #     pricelow0 = lowhigh[0][1]
-    #     getpredictedClose(df)
+
+    currentpricex2 = currentprice0 **2
+    currentpricex3 = currentprice0**3
+    predictedopenx2 = predictedopen0**2
+    predictedopenx3 = predictedopen0**3
+    lowhigh = regr_LowHigh.predict([[currentprice0,currentpricex2,currentpricex3,predictedopen0,predictedopenx2,predictedopenx3]])
+    predictedpricehigh0= lowhigh[0][0]
+
+    predictedpricelow0 = lowhigh[0][1]
+    getpredictedClose(df)
 
 
 def getpredictedClose(data):
     global predictedclose0
-    global predictedclose1
-    global predictedclose2
-    global predictedclose3
+
 
     df_predictClose = data[['Open','Low','High','Close']]
 
@@ -240,67 +163,46 @@ def getpredictedClose(data):
     regr_Close = linear_model.LinearRegression()
     regr_Close.fit(X_predictClose_train,Y_predictClose_train)
     score_open=regr_Close.score(X_predictClose_test,Y_predictClose_test)
-    if switchvalue==1:
-        predictedclose1=0
-        openx2 = predictedopen0 ** 2
-        lowpricex2 = pricelow0 ** 2
-        highpricex2 = pricehigh0 ** 2
 
-        predictedclose0 = regr_Close.predict(
-            ([[predictedopen0, openx2, pricelow0, lowpricex2, pricehigh0, highpricex2]]))
-        predictedclose0 = predictedclose0[0][0]
-        currentprice1= predictedclose0
-        return currentprice1,predictedclose0
-    # elif switchvalue==2:
-    #     predictedclose2=0
-    #     openx2 = predictedopen1 ** 2
-    #     lowpricex2 = pricelow1 ** 2
-    #     highpricex2 = pricehigh1 ** 2
-    #     predictedclose1 = regr_Close.predict(
-    #         ([[predictedopen1, openx2, pricelow1, lowpricex2, pricehigh1, highpricex2]]))
-    #     predictedclose1 = predictedclose1[0][0]
-    #     predictedclose0 = 0
-    #     return predictedclose1
-    # elif switchvalue==3:
-    #     predictedclose3
-    #     openx2 = predictedopen2 ** 2
-    #     lowpricex2 = pricelow2 ** 2
-    #     highpricex2 = pricehigh2 ** 2
-    #
-    #     predictedclose2 = regr_Close.predict(
-    #         ([[predictedopen2, openx2, pricelow2, lowpricex2, pricehigh2, highpricex2]]))
-    #     predictedclose2 = predictedclose2[0][0]
-    #
-    # elif switchvalue==4 :
-    #     openx2 = predictedopen3 ** 2
-    #     lowpricex2 = pricelow3 ** 2
-    #     highpricex2 = pricehigh3 ** 2
-    #
-    #     predictedclose3 = regr_Close.predict(
-    #         ([[predictedopen3, openx2, pricelow3, lowpricex2, pricehigh3, highpricex2]]))
-    #     predictedclose3 = predictedclose3[0][0]
-    #
-    #
+    predictedclose1=0
+    openx2 = predictedopen0 ** 2
+    lowpricex2 = predictedpricelow0** 2
+    highpricex2 = predictedpricehigh0 ** 2
+
+    predictedclose0 = regr_Close.predict(
+            ([[predictedopen0, openx2, predictedpricelow0, lowpricex2, predictedpricehigh0, highpricex2]]))
+    predictedclose0 = predictedclose0[0][0]
+    currentprice1= predictedclose0
+    return currentprice1,predictedclose0
 
 
+def getHistory(data):
+    global closed_1day
+    global closed_2day
+    global closed_3day
+    global closed_4day
+    global closed_5day
+    global dataPredict_close
+    global dataPredict_high
+    global dataPredict_low
+    data_Closed = data[['Close']]
+    data_Closed = data_Closed.tail(6)
+
+    dataPredict = data[['Low','High','Close']]
+    dataPredict = dataPredict.tail(5)
+    dataPredict_low = dataPredict.values[0][0]
+    dataPredict_high = dataPredict.values[0][1]
+    dataPredict_close = dataPredict.values[0][2]
 
 
+    closed_1day = data_Closed.values[4][0]
+    closed_2day = data_Closed.values[3][0]
+    closed_3day = data_Closed.values[2][0]
+    closed_4day = data_Closed.values[1][0]
+    closed_5day = data_Closed.values[0][0]
 
+    return closed_1day
 
-
-
-def multilayer_perceptron (x,weights,biases):
-    # hidden layer with relu activation
-    layer1 = tf.add(tf.matmul(x,weights['h1']),biases['b1'])
-    layer1 = tf.nn.relu(layer1)
-
-    #Hidden layer with relu activation
-    layer2 = tf.add(tf.matmul(layer1,weights['h2']),biases['b2'])
-    layer2 = tf.nn.relu(layer2)
-
-    # #output layer with linear activation
-    outlayer = tf.matmul(layer2,weights['out']) + biases['out']
-    return outlayer
 
 
 if __name__ == "__main__":
