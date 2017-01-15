@@ -82,7 +82,7 @@
       <file leaf-file-name="custom.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask Test/static/custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-547">
+            <state relative-caret-position="-1807">
               <caret line="454" column="22" lean-forward="false" selection-start-line="454" selection-start-column="22" selection-end-line="454" selection-end-column="22" />
               <folding>
                 <element signature="e#0#20312#0" expanded="false" />
@@ -389,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484477600195</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Almost finished">
+      <created>1484478050379</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1484478050379</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1533,7 +1540,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask Test/static/custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-547">
+        <state relative-caret-position="-1807">
           <caret line="454" column="22" lean-forward="false" selection-start-line="454" selection-start-column="22" selection-end-line="454" selection-end-column="22" />
           <folding>
             <element signature="e#0#20312#0" expanded="false" />
